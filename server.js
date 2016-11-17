@@ -1,6 +1,8 @@
 var http = require('http');
 var fs = require('fs');
 var mime = require('mime')
+var staticServer= require("./internals/static-server.js");
+
 
 //Importando configuraciones
 var config = require('./config/config');
@@ -13,33 +15,10 @@ var server = http.createServer(function(req, res){
         url = '/index.html'
     }
 
-    
-    
 
     console.log(`> Recurso solicitado> ${url}`);
-    var filePath = './static' +     url;
-    console.log(`> Se servirá archivo: ${filePath}`);
-
-    //Seleccionar el tipo de mime
-    var mimeType = mime.lookup(filePath);
-
-    fs.readFile(filePath, function(err, content){
-        if(err){
-            //Hubo un error
-                res.writeHead(500,{
-                    'Content-Type': "text/html"
-                });
-                console.log('> Error en la lectura de un archivo: l20 server.js');
-                res.end("<h1>Error interno</h1>");
-        }else{
-            //No hubo error
-                res.writeHead(200,{
-                    'Content-Type': mimeType
-                });
-                console.log(`> Sirviendo: ${filePath}`);
-                res.end(content);
-        }
-        });
+    staticServer.serve(url,res);
+    
     });
 
 server.listen(PORT, IP, function(){
