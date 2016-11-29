@@ -25,7 +25,7 @@ var handlers = {};
 
 //Registrando manejadores en el objeto manejador
 
-handlers["/crackthecookie"] = _crackTheCookie;
+handlers["/getacookie"] = _crackTheCookie;
 handlers["/getauthor"] = _getauthor;
 //Exportando objeto manejador
 module.exports = handlers;
