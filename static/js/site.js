@@ -6,10 +6,10 @@ function saludar() {
 
 function getFortuneFromServer() {
     //Realizando una petición get azincrona con AJAX asistida con Jquery
-    $.get('/crackthecookie', "", function(cookie, status) {
+    $.get('/getacookie', "", function(cookie, status) {
         //Contenido del callback
         console.log('> status: ' + status);
         // Presentando el mensaje
-        swal(cookie.paper);
+        swal(cookie.mensaje);
     }, 'json');
 }
